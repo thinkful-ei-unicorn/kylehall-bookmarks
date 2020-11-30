@@ -1,83 +1,61 @@
-let baseURL = 'https://thinkful-list-api.herokuapp.com/kylehall';
+let baseURL = 'https://thinkful-list-api.herokuapp.com/kyle';
 
-/**
- * listApiFetch - Wrapper function for native `fetch` to standardize error handling.
- * @param {string} url
- * @param {object} options
- * @returns {Promise} - resolve on all 2xx responses with JSON body
- *                    - reject on non-2xx and non-JSON response with
- *                      Object { code: Number, message: String }
- */
-const listApiFetch = function (...args) {
-  // setup var in scope outside of promise chain
+function listApiFetch(...args) {
   let error;
   return fetch(...args)
     .then((res) => {
       if (!res.ok) {
-        // if response is not 2xx, start building error object
-        error = { code: res.status };
-
-        // if response is not JSON type, place statusText in error object and
-        // immediately reject promise
-        if (!res.headers.get('content-type').includes('json')) {
-          error.message = res.statusText;
-          return Promise.reject(error);
-        }
+        // Valid HTTP response but non-2xx status - let's create an error!
+        error = {
+          code: res.status,
+        };
       }
 
-      // otherwise, return parsed JSON
+      // In either case, parse the JSON stream:
       return res.json();
     })
     .then((data) => {
-      // if error exists, place the JSON message into the error object and
-      // reject the Promise with your error object so it lands in the next
-      // catch.  IMPORTANT: Check how the API sends errors -- not all APIs
-      // will respond with a JSON object containing message key
+      // If error was flagged, reject the Promise with the error object
       if (error) {
         error.message = data.message;
         return Promise.reject(error);
       }
 
-      // otherwise, return the json as normal resolved Promise
+      // Otherwise give back the data as resolved Promise
       return data;
     });
+}
+
+let getBookmarks = function () {
+  return fetch(`${baseURL}/bookmarks`);
 };
 
-// GET Request for bookmarks on server
-let getBookmarks = () => {
-  return listApiFetch(`${baseURL}/bookmarks`);
-};
-
-// POST request for creating bookmarks to server
-let createBookmark = (bookmark) => {
-  let newBookmark = JSON.stringify({ bookmark });
-  return listApiFetch(`${baseURL}/bookmarks`, {
+let createBookmark = function (obj) {
+  let newBookmark = obj;
+  console.log('newbookmark:', newBookmark);
+  let options = {
     method: 'POST',
-    headers: {},
+    headers: {
+      'Content-type': 'application/json',
+    },
     body: newBookmark,
-  });
+  };
+
+  return listApiFetch(baseURL + '/bookmarks', options);
 };
 
-// PATCH request for editing bookmarks on server
-let editBookmark = (bookmark) => {
-  let editBookmark = JSON.stringify({ bookmark });
-  return listApiFetch(`${baseURL}/bookmarks`, {
-    method: 'PATCH',
-    headers: {},
-    body: editBookmark,
-  });
-};
-
-// DELETE request to delete bookmarks from server
-let deleteBookmark = (id) => {
-  return listApiFetch(`${baseURL}/bookmarks/${id}`, {
+let deleteBookmark = function (objId) {
+  let options = {
     method: 'DELETE',
-  });
+    headers: {
+      'Content-type': 'application/json',
+    },
+  };
+  return listApiFetch(baseURL + '/bookmarks/' + objId, options);
 };
 
 export default {
   getBookmarks,
   createBookmark,
-  editBookmark,
   deleteBookmark,
 };
