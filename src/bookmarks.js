@@ -50,29 +50,28 @@ let joinBookmarks = (bookmarks) => {
 
 let generateBookmarkHeader = () => {
   $('#main').html(`    
-    <header role="banner">
+    
     <h1>Simple Bookmark</h1>
-  </header>
-  <div class="main-container" role="main">
-    <div class="flex-container">
-      <section class="user-controls">
-        <button class="button-add js-button-add">+Add</button>
-        <div class="filter-container">
-          <label for="star-rating-filter">Filter by:</label>
-          <select name="star-rating" id="star-rating-filter">
-            <option value="0">minimum rating</option>
-            <option value="5">5+ stars</option>
-            <option value="4">4+ stars</option>
-            <option value="3">3+ stars</option>
-            <option value="2">2+ stars</option>
-            <option value="1">see all</option>
-          </div>
-        </select>
-      </section>
-      <section class="bookmark-container js-bookmark-container">
-      </section>
-    </div>
-  </div>`);
+    <div class="main-container" role="main">
+      <div class="flex-container">
+        <section class="user-controls">
+          <button class="button-add js-button-add">+Add</button>
+          <div class="filter-container">
+            <label for="star-rating-filter">Filter by:</label>
+            <select name="star-rating" id="star-rating-filter">
+              <option value="0">minimum rating</option>
+              <option value="5">5+ stars</option>
+              <option value="4">4+ stars</option>
+              <option value="3">3+ stars</option>
+              <option value="2">2+ stars</option>
+              <option value="1">see all</option>
+            </div>
+          </select>
+        </section>
+        <section class="bookmark-container js-bookmark-container">
+        </section>
+      </div>
+    </div>`);
 };
 
 let generateAdd = function () {
@@ -84,13 +83,13 @@ let generateAdd = function () {
     <div class"bookmark-hide" role="radiogroup" aria-labelledby="rating">
       <label class="form" id="rating">Rating:</label><br>
       <label class="bookmark-hide" for="rating5">5 stars</label>
-      <input type="radio" name="rating" id="rating5" value="5" checked>5 stars
+      <input type="radio" name="rating" id="rating5" value="5" checked>5 stars<br>
       <label class="bookmark-hide" for="rating4">4 stars</label>
-      <input type="radio" name="rating" id="rating4" value="4">4 stars
+      <input type="radio" name="rating" id="rating4" value="4">4 stars<br>
       <label class="bookmark-hide" for="rating3">3 stars</label>
-      <input type="radio" name="rating" id="rating3" value="3">3 stars
+      <input type="radio" name="rating" id="rating3" value="3">3 stars<br>
       <label class="bookmark-hide" for="rating2">2 stars</label>
-      <input type="radio" name="rating" id="rating2" value="2">2 stars
+      <input type="radio" name="rating" id="rating2" value="2">2 stars<br>
       <label class="bookmark-hide" for="rating1">1 star</label>
       <input type="radio" name="rating" id="rating1" value="1">1 star<br>
     </div>
@@ -98,10 +97,7 @@ let generateAdd = function () {
       <textarea name="desc" id="bookmark-description" cols="100" rows="10" ></textarea>
     </lable><br>
     <label class="form" for="url">Bookmark URL:</label><br>
-    <input type="url" name="url" id="url" required><br>
-    <div class="url-warning-container">
-      <p class="url-warning"> URL must include HTTP/HTTPS</p>
-    </div>
+    <input type="url" name="url" id="url" placeholder="URL should include: https://"required><br>
     <div class="actions">
       <input type="submit" value="Submit">
       <input type="reset" value="Reset"> 
