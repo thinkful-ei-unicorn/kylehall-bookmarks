@@ -170,8 +170,8 @@ let handleBookmarkSubmit = function () {
       .catch((e) => {
         STORE.setError(e.message);
         renderError();
+        render();
       });
-    render();
   });
 };
 
