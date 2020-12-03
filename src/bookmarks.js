@@ -51,7 +51,7 @@ let joinBookmarks = (bookmarks) => {
 let generateBookmarkHeader = () => {
   $('#main').html(`    
     
-    <h1>Simple Bookmark</h1>
+    <header><h1>Simple Bookmark</h1></header>
     <div class="main-container" role="main">
       <div class="flex-container">
         <section class="user-controls">
@@ -93,9 +93,9 @@ let generateAdd = function () {
       <label class="bookmark-hide" for="rating1">1 star</label>
       <input type="radio" name="rating" id="rating1" value="1">1 star<br>
     </div>
-    <lable class="form">Description:<br>
+    <label class="form" for="bookmark-description">Description:</label><br>
       <textarea name="desc" id="bookmark-description" cols="100" rows="10" ></textarea>
-    </lable><br>
+    <br>
     <label class="form" for="url">Bookmark URL:</label><br>
     <input type="url" name="url" id="url" placeholder="URL should include: https://"required><br>
     <div class="actions">
