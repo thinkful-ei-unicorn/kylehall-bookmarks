@@ -52,7 +52,7 @@ let generateBookmarkHeader = () => {
   $('#main').html(`    
     
     <h1>Simple Bookmark</h1>
-    <div class="main-container" role="main">
+    <div class="main-container">
       <div class="flex-container">
         <section class="user-controls">
           <button class="button-add js-button-add">+Add</button>
