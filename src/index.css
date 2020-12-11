@@ -188,14 +188,8 @@ input[type='button'] {
   margin-bottom: 20px;
 }
 
-@media screen and (max-width: 283px) {
-  body {
-    width: 283px;
-  }
-}
-
-@media screen and (min-width: 500px) {
+@media all and (min-width: 800px) {
   .flex-container {
-    width: 500px;
+    width: 90%;
   }
 }
